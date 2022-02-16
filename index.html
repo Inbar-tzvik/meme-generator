@@ -5,6 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body></body>
+  <body onload="init()">
+    <div class="gallery"></div>
+    <div class="editor hide">
+      <input class="input-text" type="text" />
+      <label class="controls__label" for="name">Overlay Text</label>
+      <div class="canvas-container">
+        <canvas id="my-canvas" width="400" height="400" style="outline: 1px solid green"></canvas>
+      </div>
+    </div>
+    <script src="js/galleryService.js"></script>
+    <script src="js/galleryControler.js"></script>
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
+  </body>
 </html>
