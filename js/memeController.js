@@ -2,21 +2,40 @@ var gCanvas;
 var gCtx;
 var elGallrey = document.querySelector('.gallery');
 var elCanvas = document.querySelector('.editor');
+var currMeme = null;
+var img = new Image();
+var gCurrline = 0;
 
 function oninit() {
+  console.log('INIT');
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
   resizeCanvas();
   elGallrey.style.display = 'none';
   elCanvas.classList.remove('hide');
 }
+// function renderMeme1() {
+//   console.log('RENDER MEME 1');
+//   gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+//   gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
+//   gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+//   drawText1();
+// }
 
 function renderMeme(id) {
-  oninit();
-  setImg(id);
-  var meme = getMeme(id);
-  drawImage(meme);
-  //   console.log(meme);
+  if (!currMeme) {
+    console.log('RENDER MEME');
+    oninit();
+    setImg(id);
+    currMeme = getMeme(id);
+    drawImage();
+  } else {
+    console.log('RENDER MEME 1');
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+    gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
+    // gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+    drawText1();
+  }
 }
 
 function resizeCanvas() {
@@ -27,29 +46,18 @@ function resizeCanvas() {
   //   gCanvas.height = elContainer.offsetHeight
 }
 
-function DynamicText() {
-  document.querySelector('.input-text').addEventListener('keyup', function () {
-    console.log('history');
-    console.log(this.value);
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // DrawOverlay(img);
-    // DrawText();
-    // text_title = this.value;
-    // ctx.fillText(text_title, 50, 50);
-  });
-}
-
-function drawImage(meme) {
-  var img = new Image();
+function drawImage() {
+  console.log('DRAW IMG');
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-    drawText(meme);
-    console.log(memeLines);
+    drawText1();
+    setLineTxt();
   };
-  img.src = `../img/${meme.selectedImgId}.jpg`;
+  img.src = `../img/${currMeme.selectedImgId}.jpg`;
 }
 
 function drawText(meme) {
+  console.log('DRAW TEXT');
   memeLines = meme.lines;
   memeLines.forEach((line) => {
     for (let key in line) {
@@ -68,3 +76,23 @@ function drawText(meme) {
     }
   });
 }
+
+function drawText1() {
+  console.log('DRAW TEXT');
+
+  memeLines = currMeme[0].lines;
+  console.log(memeLines);
+  memeLines.forEach((line, indx) => {
+    gCtx.lineWidth = 1;
+    gCtx.strokeStyle = 'brown';
+    gCtx.fillStyle = line.color;
+    gCtx.font = `${line.size}px 'Montserrat'`;
+
+    var line = line.txt;
+    gCtx.textBaseline = line.align;
+    gCtx.fillText(line, 20 + indx * 100, 35 + indx * 100);
+    // }
+  });
+}
+
+function onSwitchLine() {}

@@ -8,12 +8,18 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body onload="init()">
+    <div class="Nav-bar-bg"></div>
+
     <div class="gallery"></div>
     <div class="editor hide">
       <input class="input-text" type="text" />
       <label class="controls__label" for="name">Overlay Text</label>
+      <input type="color" class="color" name="head" value="#e66465" />
+      <div class="increase-font-btn"><img class="increase-font---icon" src="img/increase font - icon.jpg" /></div>
+      <div class="decrease-font-btn"><img src="img/decrease font - icon.jpg" class="decrease-font---icon" /></div>
+      <div class="add-line-btn"><img src="img/add.jpg" class="add" /></div>
       <div class="canvas-container">
-        <canvas id="my-canvas" width="400" height="400" style="outline: 1px solid green"></canvas>
+        <canvas id="my-canvas" width="400" height="400"></canvas>
       </div>
     </div>
     <script src="js/galleryService.js"></script>
