@@ -14,13 +14,6 @@ function oninit() {
   elGallrey.style.display = 'none';
   elCanvas.classList.remove('hide');
 }
-// function renderMeme1() {
-//   console.log('RENDER MEME 1');
-//   gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-//   gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
-//   gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
-//   drawText1();
-// }
 
 function renderMeme(id) {
   if (!currMeme) {
@@ -51,7 +44,7 @@ function drawImage() {
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     drawText1();
-    setLineTxt();
+    setLineTxt(gCurrline);
   };
   img.src = `../img/${currMeme.selectedImgId}.jpg`;
 }
@@ -95,4 +88,13 @@ function drawText1() {
   });
 }
 
-function onSwitchLine() {}
+function onSwitchLine() {
+  console.log(currMeme[0].selectedLineIdx);
+  if (currMeme[0].selectedLineIdx === currMeme[0].lines.length - 1) {
+    currMeme[0].selectedLineIdx = 0;
+  } else {
+    if (currMeme[0].selectedLineIdx < currMeme[0].lines.length) {
+      currMeme[0].selectedLineIdx += 1;
+    }
+  }
+}
