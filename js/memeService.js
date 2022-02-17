@@ -3,8 +3,8 @@ var gMeme = [
     selectedImgId: 5,
     selectedLineIdx: 0,
     lines: [
-      { txt: 'I sometimes eat Falafel', size: 20, align: 'right', color: 'blue' },
-      { txt: 'hello ', size: 20, align: 'left', color: 'red' },
+      { txt: 'Write your text here', size: 30, align: 'right', color: 'white', x: 35, y: 35 },
+      { txt: 'Write your text here', size: 30, align: 'left', color: 'white', x: 35, y: 350 },
     ],
   },
 ];
@@ -26,8 +26,16 @@ function setLineTxt(gCurrline) {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
     console.log(gMeme[0].selectedLineIdx);
     gMeme[0].lines[gMeme[0].selectedLineIdx].txt = this.value;
-    gMeme[0].lines[gMeme[gCurrline].selectedLineIdx].color = color;
+    gMeme[0].lines[gMeme[0].selectedLineIdx].color = color;
 
     renderMeme();
   });
+}
+// function setLineTxt(txt) {
+//   gMeme[0].lines[gMeme[0].selectedLineIdx].txt = txt;
+// }
+
+function saveLoc(indx, x, y) {
+  gMeme[0].lines[[indx]].x = x;
+  gMeme[0].lines[[indx]].y = y;
 }
