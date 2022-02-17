@@ -158,7 +158,17 @@ img.add {
   grid-column: 4/5;
   margin: auto;
 }
-
+.add-text {
+  width: 30px;
+  height: 30px;
+  /* margin: 0 9.5px 5px 9px; */
+  padding: 5.5px 5px 5px 5.5px;
+  border-radius: 6px;
+  background-color: #fff;
+  grid-row: 2;
+  grid-column: 5/6;
+  margin: auto;
+}
 .flex {
   display: flex;
 }
@@ -237,4 +247,14 @@ button {
   /* margin: 1px 1px 0; */
   transform: scale(0.95);
   box-shadow: -2px -2px 2px #000;
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  cursor: move;
 }

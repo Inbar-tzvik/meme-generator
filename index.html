@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/mq.css" />
   </head>
   <body onload="init()">
     <div class="Nav">
@@ -29,6 +30,7 @@
           <div class="canvas-container">
             <canvas id="my-canvas" width="400" height="400"></canvas>
           </div>
+
           <div class="editor-controlers">
             <input class="input-text" type="text" />
             <input type="color" class="color btn" name="head" value="#e66465" />
@@ -39,6 +41,7 @@
               <img src="img/decrease font - icon.jpg" class="decrease-font---icon" />
             </div>
             <div class="add-line-btn btn" onclick="onSwitchLine()"><img src="img/up-and-down.png" class="add" /></div>
+            <div class="add-text btn" onclick="onAddLine()"><img src="img/add.jpg" class="add" /></div>
           </div>
         </div>
       </div>

@@ -6,9 +6,13 @@ var currMeme = null;
 var img = new Image();
 var gCurrline = 0;
 var selectedText;
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function oninit() {
   console.log('INIT');
+  var img = document.querySelector('.furniture img');
+
+  console.log(img);
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
   //   resizeCanvas();
@@ -18,11 +22,17 @@ function oninit() {
 }
 function addListeners() {
   addMouseListeners();
+  addTouchListeners();
 }
 function addMouseListeners() {
   gCanvas.addEventListener('mousemove', onMove);
   gCanvas.addEventListener('mousedown', onDown);
   gCanvas.addEventListener('mouseup', onUp);
+}
+function addTouchListeners() {
+  gCanvas.addEventListener('touchmove', onMove);
+  gCanvas.addEventListener('touchstart', onDown);
+  gCanvas.addEventListener('touchend', onUp);
 }
 function renderMeme(id) {
   if (!currMeme) {
@@ -86,16 +96,16 @@ function drawText1(line) {
   console.log(memeLines);
   memeLines.forEach((line, indx) => {
     gCtx.lineWidth = 1;
-    gCtx.strokeStyle = 'black';
+    gCtx.strokeStyle = 'white';
     gCtx.fillStyle = line.color;
     gCtx.font = `${line.size}px 'Impact'`;
-
+    if (indx === currMeme[0].selectedLineIdx) gCtx.strokeStyle = 'black';
     gCtx.textBaseline = line.align;
     gCtx.fillText(line.txt, line.x, line.y);
     // saveLoc(indx, 35, 35 + indx * 350);
 
     gCtx.strokeText(line.txt, line.x, line.y);
-    gCtx.drawFocusIfNeeded(currMeme[0].lines[indx]);
+    gCtx.hasRotatingPoint = true;
     // }
   });
 }
@@ -109,6 +119,7 @@ function onSwitchLine() {
       currMeme[0].selectedLineIdx += 1;
     }
   }
+  renderMeme();
 }
 function onDown(ev) {
   const pos = getEvPos(ev);
@@ -119,8 +130,6 @@ function onDown(ev) {
     console.log(line.y);
     if (isCircleClicked(pos, line)) {
       selectedText = indx;
-      console.log(currMeme[0].lines[selectedText].focus());
-      currMeme[0].lines[selectedText].focus();
       console.log('index', indx);
       // } else {
       //   console.log(selectedText, 'text');
@@ -163,14 +172,14 @@ function getEvPos(ev) {
     x: ev.offsetX,
     y: ev.offsetY,
   };
-  // if (gTouchEvs.includes(ev.type)) {
-  //   ev.preventDefault();
-  //   ev = ev.changedTouches[0];
-  //   pos = {
-  //     x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-  //     y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
-  //   };
-  // }
+  if (gTouchEvs.includes(ev.type)) {
+    ev.preventDefault();
+    ev = ev.changedTouches[0];
+    pos = {
+      x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+    };
+  }
   return pos;
 }
 
@@ -188,4 +197,18 @@ function isCircleClicked(clickedPos, line) {
 function moveCircle(line, dx, dy) {
   line.x += dx;
   line.y += dy;
+}
+
+// function drawRect(x, y) {
+//   gCtx.beginPath();
+//   gCtx.rect(x, y, 150, 150);
+//   gCtx.fillStyle = 'orange';
+//   gCtx.fillRect(x, y, 150, 150);
+//   gCtx.strokeStyle = 'black';
+//   gCtx.stroke();
+// }
+
+function onAddLine() {
+  addLine();
+  renderMeme();
 }
