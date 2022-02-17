@@ -9,39 +9,43 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body onload="init()">
-    <div class="Nav-bar-bg">
-      <img src="img/layer 2.png" class="Layer-2" />
-      <ul class="main-nav clean-list flex main-layout">
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
+    <div class="Nav">
+      <div class="nav-content flex main-layout">
+        <img src="./img/layer 2.png" class="logo" />
+        <ul class="main-nav clean-list flex">
+          <li><a href="index.html">Gallery</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
     </div>
-    <main class="main-layout"">
-      <div class="search >
+    <main>
+      <div class="search main-layout">
         <input type="text" placeholder="Search.." name="search" />
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
       <div class="gallery main-layout"></div>
-      <div class="editor hide main-layout  ">
+      <div class="editor hide main-layout">
         <div class="editor-board flex">
           <div class="canvas-container">
             <canvas id="my-canvas" width="400" height="400"></canvas>
           </div>
-          <div class="editor-controlers flex">
-        <input class="input-text" type="text" />
-        <label class="controls__label" for="name">Overlay Text</label>
-        <input type="color" class="color" name="head" value="#e66465" />
-        <div class="increase-font-btn"><img class="increase-font---icon" src="img/increase font - icon.jpg" /></div>
-        <div class="decrease-font-btn"><img src="img/decrease font - icon.jpg" class="decrease-font---icon" /></div>
-        <div class="add-line-btn" onclick="onSwitchLine()"><img src="img/add.jpg" class="add" /></div>
+          <div class="editor-controlers">
+            <input class="input-text" type="text" />
+            <input type="color" class="color btn" name="head" value="#e66465" />
+            <div class="increase-font-btn btn">
+              <img class="increase-font---icon" src="img/increase font - icon.jpg" />
+            </div>
+            <div class="decrease-font-btn btn">
+              <img src="img/decrease font - icon.jpg" class="decrease-font---icon" />
+            </div>
+            <div class="add-line-btn btn" onclick="onSwitchLine()"><img src="img/up-and-down.png" class="add" /></div>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
     </main>
-    <footer class=" main-footer flex align-center">
-            <img src="img/layer 2.png" class="Layer-2" />
-            <small>© All Rights Reserved </small>
-
+    <footer class="main-footer flex align-center">
+      <img src="./img/layer 2.png" class="logo" />
+      <small>© All Rights Reserved </small>
     </footer>
     <script src="js/galleryService.js"></script>
     <script src="js/galleryControler.js"></script>

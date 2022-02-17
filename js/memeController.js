@@ -55,7 +55,7 @@ function drawImage() {
     drawText1();
     setLineTxt(gCurrline);
   };
-  img.src = `../img/${currMeme.selectedImgId}.jpg`;
+  img.src = `./img/${currMeme.selectedImgId}.jpg`;
 }
 
 // function drawText(meme) {
@@ -95,6 +95,7 @@ function drawText1(line) {
     // saveLoc(indx, 35, 35 + indx * 350);
 
     gCtx.strokeText(line.txt, line.x, line.y);
+    gCtx.drawFocusIfNeeded(currMeme[0].lines[indx]);
     // }
   });
 }
@@ -118,6 +119,8 @@ function onDown(ev) {
     console.log(line.y);
     if (isCircleClicked(pos, line)) {
       selectedText = indx;
+      console.log(currMeme[0].lines[selectedText].focus());
+      currMeme[0].lines[selectedText].focus();
       console.log('index', indx);
       // } else {
       //   console.log(selectedText, 'text');
