@@ -12,7 +12,7 @@
   <body onload="init()">
     <div class="Nav">
       <div class="nav-content flex main-layout">
-        <img src="img/layer2.png" class="logo" />
+        <img src="img/logo.png" class="logo" />
         <ul class="main-nav clean-list flex">
           <li><a href="index.html">Gallery</a></li>
           <li><a href="#">About</a></li>
@@ -34,10 +34,10 @@
           <div class="editor-controlers">
             <input class="input-text" type="text" oninput="setLineTxt()" />
             <input type="color" class="color btn" name="head" value="#e66465" />
-            <div class="increase-font-btn btn">
+            <div class="increase-font-btn btn" onclick="onIncreaseSize()">
               <img class="increase-font---icon" src="img/increase font - icon.jpg" />
             </div>
-            <div class="decrease-font-btn btn">
+            <div class="decrease-font-btn btn" onclick="onDecreaseSize()">
               <img src="img/decrease font - icon.jpg" class="decrease-font---icon" />
             </div>
             <div class="add-line-btn btn" onclick="onSwitchLine()"><img src="img/up-and-down.png" class="add" /></div>
@@ -48,7 +48,7 @@
       <section class="bg-light"></section>
     </main>
     <footer class="main-footer flex align-center">
-      <img src="./img/layer2.png" class="logo" />
+      <img src="./img/logo.png" class="logo" />
       <small>© All Rights Reserved </small>
     </footer>
     <script src="js/galleryService.js"></script>
