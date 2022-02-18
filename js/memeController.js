@@ -2,6 +2,7 @@ var gCanvas;
 var gCtx;
 var elGallrey = document.querySelector('.gallery');
 var elCanvas = document.querySelector('.editor');
+var randBtn = document.querySelector('.random-meme');
 var currMeme = null;
 var gCurrline = 0;
 var selectedText;
@@ -14,7 +15,9 @@ function oninit() {
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
   //   resizeCanvas();
+  randBtn.style.display = 'none';
   elGallrey.style.display = 'none';
+
   elCanvas.classList.remove('hide');
   gCanvasWidth = gCanvas.width;
   addListeners();
@@ -36,18 +39,13 @@ function addTouchListeners() {
 function renderMeme(id) {
   if (!currMeme) {
     oninit();
-
     setImg(id);
     currMeme = getMeme(id);
   }
-
   // gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
   gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
   if (!changed) checkCanvasSIzeChanged();
   drawImage();
-
-  // gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-  // gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
   drawText();
 }
 
@@ -68,17 +66,18 @@ function drawImage() {
     drawText();
     // setLineTxt(gCurrline);
   };
+  console.log(currMeme.selectedImgId);
   img.src = `./img/${currMeme.selectedImgId}.jpg`;
 }
 
 function drawText() {
-  memeLines = currMeme[0].lines;
+  memeLines = currMeme.lines;
   memeLines.forEach((line, indx) => {
     gCtx.lineWidth = 1;
     gCtx.strokeStyle = 'white';
     gCtx.fillStyle = line.color;
     gCtx.font = `${line.size}px 'Impact'`;
-    if (indx === currMeme[0].selectedLineIdx) gCtx.strokeStyle = 'black';
+    if (indx === currMeme.selectedLineIdx) gCtx.strokeStyle = 'black';
     gCtx.textBaseline = line.align;
     gCtx.fillText(line.txt, line.x, line.y);
 
@@ -87,33 +86,30 @@ function drawText() {
 }
 
 function onSwitchLine() {
-  console.log(currMeme[0].selectedLineIdx);
-  if (currMeme[0].selectedLineIdx === currMeme[0].lines.length - 1) {
-    currMeme[0].selectedLineIdx = 0;
+  console.log(currMeme.selectedLineIdx);
+  if (currMeme.selectedLineIdx === currMeme.lines.length - 1) {
+    currMeme.selectedLineIdx = 0;
   } else {
-    if (currMeme[0].selectedLineIdx < currMeme[0].lines.length) {
-      currMeme[0].selectedLineIdx += 1;
+    if (currMeme.selectedLineIdx < currMeme.lines.length) {
+      currMeme.selectedLineIdx += 1;
     }
   }
   renderMeme();
 }
 function onIncreaseSize() {
-  currMeme[0].lines[currMeme[0].selectedLineIdx].size += 1;
+  currMeme.lines[currMeme.selectedLineIdx].size += 1;
   renderMeme();
 }
 
 function onDecreaseSize() {
-  currMeme[0].lines[currMeme[0].selectedLineIdx].size -= 1;
+  currMeme.lines[currMeme.selectedLineIdx].size -= 1;
   renderMeme();
 }
 function onDown(ev) {
-  memeLines = currMeme[0].lines;
+  memeLines = currMeme.lines;
 
   const pos = getEvPos(ev);
   memeLines.forEach((line, indx) => {
-    console.log(line.x);
-    console.log(line.y);
-    console.log(line);
     console.log(isTextClicked(pos, line));
     if (isTextClicked(pos, line)) {
       selectedText = indx;
@@ -124,7 +120,7 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-  var memeLines = currMeme[0].lines;
+  var memeLines = currMeme.lines;
   // console.log('location', ev.offsetX);
   // console.log('location', ev.offsetY);
 
@@ -202,4 +198,10 @@ function setLineTxt() {
   var input = document.querySelector('.input-text').value;
   var color = document.querySelector('.color').value;
   updateTxt(input, color);
+}
+
+function buildRand() {
+  currMeme = genRandomMime();
+  oninit();
+  renderMeme();
 }

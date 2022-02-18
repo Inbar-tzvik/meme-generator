@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/mq.css" />
   </head>
   <body onload="init()">
     <div class="main-screen" onclick="toggleMenu()"></div>
@@ -19,14 +18,16 @@
           <li><a href="index.html">Gallery</a></li>
           <li><a href="#">About</a></li>
         </ul>
-        <button class="btn-menu" onclick="toggleMenu()">☰</button>
+        <button class="btn-menu" onclick="toggleMenu()"><img src="img/ham.png" alt=""></button>
 
       </nav>
     </div>
     <main>
-      <div class="search main-layout">
-        <input type="text" placeholder="Search.." name="search" />
-        <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="search flex main-layout">
+        <!-- <input class= "search-input" type="text" placeholder="Search.." name="search" /> -->
+        <button class="search-btn"type="submit"> search . . .<i class="fa fa-search"></i></button>
+        <button class="random-meme" type="button" onclick="buildRand()">random
+        </button>
       </div>
       <div class="gallery main-layout"></div>
       <div class="editor hide main-layout">
