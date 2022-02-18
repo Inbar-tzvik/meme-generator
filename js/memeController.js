@@ -66,7 +66,7 @@ function drawImage() {
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     drawText1();
-    setLineTxt(gCurrline);
+    // setLineTxt(gCurrline);
   };
   img.src = `./img/${currMeme.selectedImgId}.jpg`;
 }
@@ -116,8 +116,8 @@ function onDown(ev) {
 
 function onMove(ev) {
   var memeLines = currMeme[0].lines;
-  console.log('location', ev.offsetX);
-  console.log('location', ev.offsetY);
+  // console.log('location', ev.offsetX);
+  // console.log('location', ev.offsetY);
 
   // console.log('hiii', selectedText);
   if (selectedText > -1) {

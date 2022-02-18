@@ -8,6 +8,8 @@ var gMeme = [
     ],
   },
 ];
+var input = document.querySelector('.input-text').value;
+var color = document.querySelector('.color').value;
 
 function setImg(id) {
   gMeme.selectedImgId = id;
@@ -20,16 +22,17 @@ function getMeme(id) {
 }
 function setLineTxt(gCurrline) {
   console.log('SET LINE TXT');
-  document.querySelector('.input-text').addEventListener('keyup', function () {
-    console.log('ON KEY UP');
-    var color = document.querySelector('.color').value;
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-    console.log(gMeme[0].selectedLineIdx);
-    gMeme[0].lines[gMeme[0].selectedLineIdx].txt = this.value;
-    gMeme[0].lines[gMeme[0].selectedLineIdx].color = color;
+  //   document.querySelector('.input-text').addEventListener('keyup', function () {
+  var input = document.querySelector('.input-text').value;
+  var color = document.querySelector('.color').value;
+  console.log('ON KEY UP');
+  //   gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+  console.log(gMeme[0].selectedLineIdx);
+  gMeme[0].lines[gMeme[0].selectedLineIdx].txt = input;
+  gMeme[0].lines[gMeme[0].selectedLineIdx].color = color;
 
-    renderMeme();
-  });
+  renderMeme();
+  //   });
 }
 // function setLineTxt(txt) {
 //   gMeme[0].lines[gMeme[0].selectedLineIdx].txt = txt;
