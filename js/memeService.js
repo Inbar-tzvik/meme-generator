@@ -43,3 +43,14 @@ function saveLoc(indx, x, y) {
 function addLine() {
   gMeme[0].lines.push({ txt: 'Write your text here', size: 30, align: 'left', color: 'white', x: 35, y: 250 });
 }
+
+function moveText(line, dx, dy) {
+  line.x += dx;
+  line.y += dy;
+}
+
+function Updatelocation(newYDec) {
+  gMeme[0].lines.forEach((line) => {
+    line.y -= 10;
+  });
+}

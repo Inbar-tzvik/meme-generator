@@ -3,21 +3,20 @@ var gCtx;
 var elGallrey = document.querySelector('.gallery');
 var elCanvas = document.querySelector('.editor');
 var currMeme = null;
-var img = new Image();
 var gCurrline = 0;
 var selectedText;
+var gCanvasWidth;
+var changed = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
-
 function oninit() {
   console.log('INIT');
-  var img = document.querySelector('.furniture img');
 
-  console.log(img);
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
   //   resizeCanvas();
   elGallrey.style.display = 'none';
   elCanvas.classList.remove('hide');
+  gCanvasWidth = gCanvas.width;
   addListeners();
 }
 function addListeners() {
@@ -37,17 +36,19 @@ function addTouchListeners() {
 function renderMeme(id) {
   if (!currMeme) {
     oninit();
-    console.log('RENDER MEME');
+
     setImg(id);
     currMeme = getMeme(id);
-    drawImage();
-  } else {
-    console.log('RENDER MEME 1');
-    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-    gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
-    // gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
-    drawText1();
   }
+
+  // gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+  gCtx.fillStyle = 'rgba(30, 144, 255, 0.4)';
+  if (!changed) checkCanvasSIzeChanged();
+  drawImage();
+
+  // gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+  // gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+  drawText1();
 }
 
 // function resizeCanvas() {
@@ -59,7 +60,9 @@ function renderMeme(id) {
 // }
 
 function drawImage() {
-  console.log('DRAW IMG');
+  // console.log('DRAW IMG');
+  var img = new Image();
+
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     drawText1();
@@ -68,32 +71,8 @@ function drawImage() {
   img.src = `./img/${currMeme.selectedImgId}.jpg`;
 }
 
-// function drawText(meme) {
-//   console.log('DRAW TEXT');
-//   memeLines = meme.lines;
-//   memeLines.forEach((line) => {
-//     for (let key in line) {
-//       //   console.log(`${key}: ${mobile[key]}`);
-
-//       gCtx.lineWidth = 1;
-//       gCtx.strokeStyle = 'brown';
-//       gCtx.fillStyle = 'white';
-//       // if (key == 'size')
-//       gCtx.font = "40px 'Impact'";
-//       if (key === 'txt') {
-//         console.log(line[[key]]);
-//         gCtx.textBaseline = 'middle';
-//         gCtx.fillText(line[key], 35, 50);
-//       }
-//     }
-//   });
-// }
-
-function drawText1(line) {
-  console.log('DRAW TEXT');
-
+function drawText1() {
   memeLines = currMeme[0].lines;
-  console.log(memeLines);
   memeLines.forEach((line, indx) => {
     gCtx.lineWidth = 1;
     gCtx.strokeStyle = 'white';
@@ -102,11 +81,8 @@ function drawText1(line) {
     if (indx === currMeme[0].selectedLineIdx) gCtx.strokeStyle = 'black';
     gCtx.textBaseline = line.align;
     gCtx.fillText(line.txt, line.x, line.y);
-    // saveLoc(indx, 35, 35 + indx * 350);
 
     gCtx.strokeText(line.txt, line.x, line.y);
-    gCtx.hasRotatingPoint = true;
-    // }
   });
 }
 
@@ -122,51 +98,43 @@ function onSwitchLine() {
   renderMeme();
 }
 function onDown(ev) {
+  memeLines = currMeme[0].lines;
+
   const pos = getEvPos(ev);
-  console.log('onDown()');
-  //   console.log(ev);
   memeLines.forEach((line, indx) => {
     console.log(line.x);
     console.log(line.y);
-    if (isCircleClicked(pos, line)) {
+    console.log(line);
+    console.log(isTextClicked(pos, line));
+    if (isTextClicked(pos, line)) {
       selectedText = indx;
       console.log('index', indx);
-      // } else {
-      //   console.log(selectedText, 'text');
-      //   selectedText = -1;
     }
   });
-
-  //   if (!isSenTtenceClicked(pos)) return;
-  //   setCircleDrag(true);
-  //   gStartPos = pos;
   document.body.style.cursor = 'grabbing';
 }
 
 function onMove(ev) {
-  //   console.log('onMove()');
-  //   const pos = getEvPos(ev);
-
-  //   const circle = getCircle();
   var memeLines = currMeme[0].lines;
-  console.log('hiii', selectedText);
-  if (selectedText > -1) {
-    console.log('here');
-    const pos = getEvPos(ev);
+  console.log('location', ev.offsetX);
+  console.log('location', ev.offsetY);
 
+  // console.log('hiii', selectedText);
+  if (selectedText > -1) {
+    const pos = getEvPos(ev);
     const dx = pos.x - memeLines[selectedText].x;
     const dy = pos.y - memeLines[selectedText].y;
-    moveCircle(memeLines[selectedText], dx, dy);
+    moveText(memeLines[selectedText], dx, dy);
     // gStartPos = pos;
     renderMeme();
   }
 }
 
 function onUp() {
-  console.log('onUp()');
   selectedText = -1;
   document.body.style.cursor = 'grab';
 }
+
 function getEvPos(ev) {
   var pos = {
     x: ev.offsetX,
@@ -183,20 +151,15 @@ function getEvPos(ev) {
   return pos;
 }
 
-function isCircleClicked(clickedPos, line) {
+function isTextClicked(clickedPos, line) {
   console.log('x', clickedPos.x);
+  console.log('y', clickedPos.y);
+
   var x = line.x;
   var y = line.y;
   var width = gCtx.measureText(line.txt).width;
-  //   const distance = Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2);
-  //   var distance = gCtx.measureText(line.txt).width - clickedPos.x;
-  //   console.log(distance);
+  //
   return clickedPos.x >= x && clickedPos.x <= x + width && clickedPos.y >= y - line.size && clickedPos.y <= y;
-}
-
-function moveCircle(line, dx, dy) {
-  line.x += dx;
-  line.y += dy;
 }
 
 // function drawRect(x, y) {
@@ -211,4 +174,16 @@ function moveCircle(line, dx, dy) {
 function onAddLine() {
   addLine();
   renderMeme();
+}
+function checkCanvasSIzeChanged() {
+  console.log(window.innerWidth);
+  console.log(gCanvasWidth);
+  console.log(gCanvas.width);
+  if (window.innerWidth <= 750) {
+    var newYDec = 100;
+    Updatelocation(newYDec);
+    changed = true;
+  } else {
+    changed = false;
+  }
 }
