@@ -8,6 +8,7 @@ var gCurrline = 0;
 var selectedText;
 var gCanvasWidth;
 var changed = false;
+var rotate = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function oninit() {
   console.log('INIT');
@@ -80,7 +81,6 @@ function drawText() {
     if (indx === currMeme.selectedLineIdx) gCtx.strokeStyle = 'black';
     gCtx.textBaseline = line.align;
     gCtx.fillText(line.txt, line.x, line.y);
-
     gCtx.strokeText(line.txt, line.x, line.y);
   });
 }
@@ -205,3 +205,11 @@ function buildRand() {
   oninit();
   renderMeme();
 }
+
+// function rotate_ctx() {
+//   rotate = true;
+// var line = currMeme.lines[currMeme.selectedLineIdx];
+// gCtx.fillText(line.txt, line.x, line.y);
+// gCtx.rotate((Math.PI / 180) * 15);
+// gCtx.translate(-line.x, -line.y);
+// gCtx.fillText(line.txt, 0, 0);

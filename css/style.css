@@ -339,3 +339,12 @@ body.menu-open .main-screen {
   box-shadow: #d5e03c 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+.datalist {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.sign {
+  margin-top: 1rem;
+}

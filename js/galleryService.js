@@ -13,6 +13,18 @@ var gImgs = [
   { id: 12, url: './img/12.jpg', keywords: ['man', 'you'] },
 ];
 
-function getImgs() {
-  return gImgs;
+var gFilterBy = 'ALL';
+// function getImgs() {
+//   return gImgs;
+// }
+function setFilter(filterBy) {
+  if (filterBy === 'ALL') gFilterBy = 'ALL';
+  gFilterBy = filterBy;
+  console.log(gFilterBy);
+  renderGallery();
+}
+function getImagesForDisplay() {
+  if (gFilterBy === 'ALL') return gImgs;
+
+  return gImgs.filter((img) => img.keywords.includes(gFilterBy));
 }

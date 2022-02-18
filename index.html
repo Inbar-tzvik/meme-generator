@@ -25,8 +25,27 @@
     <main>
       <div class="search flex main-layout">
         <!-- <input class= "search-input" type="text" placeholder="Search.." name="search" /> -->
-        <button class="search-btn"type="submit"> search . . .<i class="fa fa-search"></i></button>
-        <button class="random-meme" type="button" onclick="buildRand()">random
+        <!-- <button class="search-btn"type="submit"> search . . .<i class="fa fa-search"></i></button> -->
+        
+        <div class="search-bar flex">
+        <input class="datalist flex" list="gallery" placeholder="search..." onchange="setFilter(this.value)">
+        <datalist id="gallery">
+          <option value="ALL">
+          <option value="dog">
+          <option value="baby">
+          <option value="hands">
+          <option value="cute">
+          <option value="funny">
+          <option value="dogzzz">
+         <option value="politics">
+         <option value="sports">
+         <option value="man">
+         <option value="you">
+        </datalist>
+        <i class="fa fa-search sign"></i>
+      </div>
+        <button class="random-meme" type="button" onclick="buildRand()">I'm flexible
+
         </button>
       </div>
       <div class="gallery main-layout"></div>
@@ -35,7 +54,7 @@
           <div class="canvas-container">
             <canvas id="my-canvas" width="400" height="400"></canvas>
           </div>
-
+          <button type="button" onclick="rotate_ctx();">Rotate context</button>
           <div class="editor-controlers">
             <input class="input-text" type="text" oninput="setLineTxt()" />
             <input type="color" class="color btn" name="head" value="#e66465" />
