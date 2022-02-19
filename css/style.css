@@ -18,6 +18,18 @@ body {
 h1 {
   font-family: lato-regular;
 }
+.fa {
+  padding: 10px;
+  font-size: 15px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-facebook {
+  background: #3b5998;
+  color: white;
+}
 .main-layout {
   margin: 0 auto;
   max-width: 980px;
@@ -227,9 +239,10 @@ img.add {
   height: 50px;
   text-decoration: none;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: lato-regular;
-
+  padding-right: 10px;
+  padding-left: 10px;
   transition: box-shadow 0.3s;
   border-right: 1px solid rgba(17, 9, 9);
 }

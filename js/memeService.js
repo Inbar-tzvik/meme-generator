@@ -1,3 +1,5 @@
+'use strict';
+
 var gMeme = [
   {
     selectedImgId: 5,
@@ -27,7 +29,6 @@ const memesSentences = [
   'Write hello world , add to cv 7 years experienced',
 ];
 
-var stickres = ['😍', '🥴', '😀', '😁', '🥺', '😬', '🤷🏼‍♀️', '🤭'];
 function setImg(id) {
   gMeme[0].selectedImgId = id;
 }

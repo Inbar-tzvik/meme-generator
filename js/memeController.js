@@ -1,3 +1,4 @@
+'use strict';
 var gCanvas;
 var gCtx;
 var elGallrey = document.querySelector('.gallery');
@@ -11,8 +12,6 @@ var changed = false;
 var rotate = false;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function oninit() {
-  console.log('INIT');
-
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
   //   resizeCanvas();
@@ -50,14 +49,6 @@ function renderMeme(id) {
   drawText();
 }
 
-// function resizeCanvas() {
-//   var elContainer = document.querySelector('.canvas-container');
-//   // Note: changing the canvas dimension this way clears the canvas
-//   gCanvas.width = elContainer.offsetWidth - 20;
-//   // Unless needed, better keep height fixed.
-//   //   gCanvas.height = elContainer.offsetHeight
-// }
-
 function drawImage() {
   // console.log('DRAW IMG');
   var img = new Image();
@@ -72,7 +63,7 @@ function drawImage() {
 }
 
 function drawText() {
-  memeLines = currMeme.lines;
+  var memeLines = currMeme.lines;
   memeLines.forEach((line, indx) => {
     gCtx.lineWidth = 1;
     gCtx.strokeStyle = 'white';
@@ -121,16 +112,12 @@ function onDown(ev) {
 
 function onMove(ev) {
   var memeLines = currMeme.lines;
-  // console.log('location', ev.offsetX);
-  // console.log('location', ev.offsetY);
 
-  // console.log('hiii', selectedText);
   if (selectedText > -1) {
     const pos = getEvPos(ev);
     const dx = pos.x - memeLines[selectedText].x;
     const dy = pos.y - memeLines[selectedText].y;
     moveText(memeLines[selectedText], dx, dy);
-    // gStartPos = pos;
     renderMeme();
   }
 }
@@ -167,23 +154,11 @@ function isTextClicked(clickedPos, line) {
   return clickedPos.x >= x && clickedPos.x <= x + width && clickedPos.y >= y - line.size && clickedPos.y <= y;
 }
 
-// function drawRect(x, y) {
-//   gCtx.beginPath();
-//   gCtx.rect(x, y, 150, 150);
-//   gCtx.fillStyle = 'orange';
-//   gCtx.fillRect(x, y, 150, 150);
-//   gCtx.strokeStyle = 'black';
-//   gCtx.stroke();
-// }
-
 function onAddLine() {
   addLine();
   renderMeme();
 }
 function checkCanvasSIzeChanged() {
-  // console.log(window.innerWidth);
-  // console.log(gCanvasWidth);
-  // console.log(gCanvas.width);
   if (window.innerWidth <= 750) {
     Updatelocation();
     changed = true;
@@ -194,7 +169,6 @@ function checkCanvasSIzeChanged() {
 
 function setLineTxt() {
   console.log('SET LINE TXT');
-  //   document.querySelector('.input-text').addEventListener('keyup', function () {
   var input = document.querySelector('.input-text').value;
   var color = document.querySelector('.color').value;
   updateTxt(input, color);
@@ -205,14 +179,6 @@ function buildRand() {
   oninit();
   renderMeme();
 }
-
-// function rotate_ctx() {
-//   rotate = true;
-// var line = currMeme.lines[currMeme.selectedLineIdx];
-// gCtx.fillText(line.txt, line.x, line.y);
-// gCtx.rotate((Math.PI / 180) * 15);
-// gCtx.translate(-line.x, -line.y);
-// gCtx.fillText(line.txt, 0, 0);
 
 function saveMeme(elLink) {
   var imgContent = gCanvas.toDataURL('image/jpeg');
@@ -226,4 +192,41 @@ function onAddeEmoji() {
   console.log(Select_value);
   addEmoji(Select_value);
   renderMeme();
+}
+
+function uploadImg() {
+  const imgDataUrl = gCanvas.toDataURL('image/jpeg');
+
+  // A function to be called if request succeeds
+  function onSuccess(uploadedImgUrl) {
+    const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl);
+    console.log(encodedUploadedImgUrl);
+    // document.querySelector('.user-msg').innerText = `Your photo is available here: ${uploadedImgUrl}`;
+
+    // document.querySelector('.share-container').innerHTML = `
+    //   <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+    //      Share
+    //   </a>`;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`);
+  }
+
+  doUploadImg(imgDataUrl, onSuccess);
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+  const formData = new FormData();
+  formData.append('img', imgDataUrl);
+
+  fetch('//ca-upload.com/here/upload.php', {
+    method: 'POST',
+    body: formData,
+  })
+    .then((res) => res.text())
+    .then((url) => {
+      console.log('Got back live url:', url);
+      onSuccess(url);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
