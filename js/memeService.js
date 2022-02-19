@@ -8,6 +8,7 @@ var gMeme = [
     ],
   },
 ];
+var gSavedMemes = [];
 const memesSentences = [
   'I never eat falafel',
   'DOMS DOMS EVERYWHERE',
@@ -26,6 +27,7 @@ const memesSentences = [
   'Write hello world , add to cv 7 years experienced',
 ];
 
+var stickres = ['😍', '🥴', '😀', '😁', '🥺', '😬', '🤷🏼‍♀️', '🤭'];
 function setImg(id) {
   gMeme[0].selectedImgId = id;
 }
@@ -84,4 +86,16 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function addMemeToArr(img) {
+  gSavedMemes = loadFromStorage(STORAGE_KEY);
+  if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = [];
+  gSavedMemes.push(img);
+  console.log(gSavedMemes);
+  _saveMemesToStorage();
+}
+
+function _saveMemesToStorage() {
+  saveToStorage(STORAGE_KEY, gSavedMemes);
 }

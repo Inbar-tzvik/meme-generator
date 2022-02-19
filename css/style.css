@@ -15,9 +15,15 @@ body {
 /* body {
     min-height: 100vh;
   } */
+h1 {
+  font-family: lato-regular;
+}
 .main-layout {
   margin: 0 auto;
   max-width: 980px;
+}
+.meme-gallery {
+  display: none;
 }
 .gallery {
   display: flex;
@@ -109,19 +115,20 @@ img.decrease-font---icon {
   max-width: 50%;
   padding-right: 2rem;
   padding-top: 4rem;
-  height: 100%;
+  height: 50%;
   display: grid;
   text-align: center;
 
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 
-  grid-template-rows: 1fr 1fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
 
   /* flex-direction: column;
     justify-content: center; */
 }
 .input-text {
+  height: 30px;
   grid-row: 1;
   grid-column: 1/6;
 }
@@ -170,6 +177,17 @@ img.add {
   grid-column: 5/6;
   margin: auto;
 }
+.save-to-my-memes {
+  grid-row: 3;
+  grid-column: 2/4;
+  height: 40px;
+  width: 90px;
+}
+.emoji {
+  grid-row: 4;
+  grid-column: 1/6;
+  border: 1px solid black;
+}
 .flex {
   display: flex;
 }
@@ -197,10 +215,11 @@ img.add {
   font-family: lato-regular;
 
   transition: box-shadow 0.3s;
-}
-.main-nav li:first-child {
   border-right: 1px solid rgba(17, 9, 9);
-  font-family: lato;
+}
+.main-nav li:last-child a {
+  border-right: none;
+  font-family: lato-regular;
 }
 
 .main-nav a:hover {

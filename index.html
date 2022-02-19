@@ -17,6 +17,8 @@
         <ul class="main-nav clean-list flex">
           <li><a href="index.html">Gallery</a></li>
           <li><a href="#">About</a></li>
+          <li><a href="#" onclick="renderMemeGallery()">My Memes</a></li>
+
         </ul>
         <button class="btn-menu" onclick="toggleMenu()"><img src="img/ham.png" alt=""></button>
 
@@ -49,13 +51,22 @@
         </button>
       </div>
       <div class="gallery main-layout"></div>
+      <div class="meme-gallery main-layout">
+        <h1>My Saved Memes</h1>
+        <div class="saved-memes"></div>
+      </div>
+
       <div class="editor hide main-layout">
         <div class="editor-board flex">
           <div class="canvas-container">
             <canvas id="my-canvas" width="400" height="400"></canvas>
           </div>
-          <button type="button" onclick="rotate_ctx();">Rotate context</button>
+          <!-- <button type="button" onclick="rotate_ctx();">Rotate context</button> -->
+          
+          
           <div class="editor-controlers">
+            <button class="btn save-to-my-memes" onclick="saveMeme(this)" >Save to My Mmemes</button>
+            <div class="emoji">😍 🥴 😀 😁 🥺 😬 🤷🏼‍♀️ 🤭 </div> 
             <input class="input-text" type="text" oninput="setLineTxt()" />
             <input type="color" class="color btn" name="head" value="#e66465" />
             <div class="increase-font-btn btn" onclick="onIncreaseSize()">
@@ -75,6 +86,8 @@
       <img src="./img/logo.png" class="logo" />
       <small>© All Rights Reserved </small>
     </footer>
+    <script src="js/storage-service.js"></script>
+    <script src="js/memesSaved.js"></script>
     <script src="js/galleryService.js"></script>
     <script src="js/galleryControler.js"></script>
     <script src="js/memeService.js"></script>

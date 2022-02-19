@@ -213,3 +213,14 @@ function buildRand() {
 // gCtx.rotate((Math.PI / 180) * 15);
 // gCtx.translate(-line.x, -line.y);
 // gCtx.fillText(line.txt, 0, 0);
+
+function saveMeme(elLink) {
+  var imgContent = gCanvas.toDataURL('image/jpeg');
+  addMemeToArr(imgContent);
+  // elLink.href = imgContent;
+}
+
+function onAddeEmoji() {
+  addEmoji();
+  renderMeme();
+}
