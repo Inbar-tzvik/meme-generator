@@ -22,7 +22,6 @@ var gFilterBy = 'ALL';
 function setFilter(filterBy) {
   if (filterBy === 'ALL') gFilterBy = 'ALL';
   gFilterBy = filterBy;
-  console.log(gFilterBy);
   renderGallery();
 }
 function getImagesForDisplay() {

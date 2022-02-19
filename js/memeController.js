@@ -9,12 +9,11 @@ var gCurrline = 0;
 var selectedText;
 var gCanvasWidth;
 var changed = false;
-var rotate = false;
+var memeLines;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function oninit() {
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
-  //   resizeCanvas();
   randBtn.style.display = 'none';
   elGallrey.style.display = 'none';
 
@@ -58,12 +57,11 @@ function drawImage() {
     drawText();
     // setLineTxt(gCurrline);
   };
-  console.log(currMeme.selectedImgId);
   img.src = `./img/${currMeme.selectedImgId}.jpg`;
 }
 
 function drawText() {
-  var memeLines = currMeme.lines;
+  memeLines = currMeme.lines;
   memeLines.forEach((line, indx) => {
     gCtx.lineWidth = 1;
     gCtx.strokeStyle = 'white';
@@ -77,7 +75,6 @@ function drawText() {
 }
 
 function onSwitchLine() {
-  console.log(currMeme.selectedLineIdx);
   if (currMeme.selectedLineIdx === currMeme.lines.length - 1) {
     currMeme.selectedLineIdx = 0;
   } else {
@@ -101,10 +98,8 @@ function onDown(ev) {
 
   const pos = getEvPos(ev);
   memeLines.forEach((line, indx) => {
-    console.log(isTextClicked(pos, line));
     if (isTextClicked(pos, line)) {
       selectedText = indx;
-      console.log('index', indx);
     }
   });
   document.body.style.cursor = 'grabbing';
@@ -144,13 +139,9 @@ function getEvPos(ev) {
 }
 
 function isTextClicked(clickedPos, line) {
-  console.log('x', clickedPos.x);
-  console.log('y', clickedPos.y);
-
   var x = line.x;
   var y = line.y;
   var width = gCtx.measureText(line.txt).width;
-  //
   return clickedPos.x >= x && clickedPos.x <= x + width && clickedPos.y >= y - line.size && clickedPos.y <= y;
 }
 
@@ -180,16 +171,14 @@ function buildRand() {
   renderMeme();
 }
 
-function saveMeme(elLink) {
+function saveMeme() {
   var imgContent = gCanvas.toDataURL('image/jpeg');
   addMemeToArr(imgContent);
-  // elLink.href = imgContent;
 }
 
 function onAddeEmoji() {
   var x = document.querySelector('.emoji');
   var Select_value = x.options[x.selectedIndex].text;
-  console.log(Select_value);
   addEmoji(Select_value);
   renderMeme();
 }
@@ -201,12 +190,7 @@ function uploadImg() {
   function onSuccess(uploadedImgUrl) {
     const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl);
     console.log(encodedUploadedImgUrl);
-    // document.querySelector('.user-msg').innerText = `Your photo is available here: ${uploadedImgUrl}`;
 
-    // document.querySelector('.share-container').innerHTML = `
-    //   <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-    //      Share
-    //   </a>`;
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`);
   }
 

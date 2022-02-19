@@ -396,3 +396,9 @@ body.menu-open .main-screen {
 .sign {
   margin-top: 1rem;
 }
+
+.share-fc {
+  grid-row: 3;
+  grid-column: 4/6;
+  font-family: lato-regular;
+}

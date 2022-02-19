@@ -5,7 +5,6 @@
 const STORAGE_KEY = 'Mmems';
 
 function renderMemeGallery() {
-  console.log('you are here');
   document.querySelector('.meme-gallery').style.display = 'block';
 
   document.querySelector('.gallery').style.display = 'none';
@@ -14,7 +13,7 @@ function renderMemeGallery() {
 
   var strHtmls = '';
   const memes = loadFromStorage(STORAGE_KEY);
-  if (!memes || !memes.length) strHtmls += 'There is no saved Mmems yet';
+  if (!memes || !memes.length) strHtmls += 'There is no saved Mems yet';
   else {
     strHtmls += memes.map((img) => `<img class="item"  src="${img}">`).join('');
   }

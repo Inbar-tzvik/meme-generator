@@ -33,9 +33,7 @@ function setImg(id) {
   gMeme[0].selectedImgId = id;
 }
 function getMeme(id) {
-  //   console.log(typeof id);
   var meme = gMeme.find((meme) => meme.selectedImgId === id);
-  //   console.log(meme);
   return meme;
 }
 function updateTxt(input, color) {
@@ -93,7 +91,6 @@ function addMemeToArr(img) {
   gSavedMemes = loadFromStorage(STORAGE_KEY);
   if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = [];
   gSavedMemes.push(img);
-  console.log(gSavedMemes);
   _saveMemesToStorage();
 }
 
