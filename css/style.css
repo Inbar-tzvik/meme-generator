@@ -182,11 +182,27 @@ img.add {
   grid-column: 2/4;
   height: 40px;
   width: 90px;
+  font-family: lato-regular;
 }
 .emoji {
   grid-row: 4;
-  grid-column: 1/6;
+  grid-column: 1/4;
   border: 1px solid black;
+  height: 45px;
+  width: 210px;
+}
+.emoji option {
+  font-size: 30px;
+}
+.emoji-btn {
+  /* width: 60px; */
+  grid-row: 4;
+  grid-column: 6/6;
+  font-family: lato-regular;
+}
+
+.emoji option {
+  display: table-cell;
 }
 .flex {
   display: flex;

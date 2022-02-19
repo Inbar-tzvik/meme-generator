@@ -64,9 +64,21 @@
           <!-- <button type="button" onclick="rotate_ctx();">Rotate context</button> -->
           
           
-          <div class="editor-controlers">
-            <button class="btn save-to-my-memes" onclick="saveMeme(this)" >Save to My Mmemes</button>
-            <div class="emoji">😍 🥴 😀 😁 🥺 😬 🤷🏼‍♀️ 🤭 </div> 
+          <div class="editor-controlers main-layout">
+            <button class="btn save-to-my-memes" onclick="saveMeme(this)" >Save to My Memes</button>
+            <!-- <div class="emoji" >  -->
+              <select class="emoji" size="6" ">
+                <option value="😍">😍</option>
+                <option value="🥴">🥴</option>
+                <option value="😁">😁</option>
+                <option value="😀">😀</option>
+                <option value="🥺">🥺</option>
+                <option value="🤭">🤭</option>
+
+               </select> 
+               <input  class="emoji-btn" type="button" id="bouton_Envoyer" value="add emoji" onclick="onAddeEmoji()">
+
+              <!-- </div>  -->
             <input class="input-text" type="text" oninput="setLineTxt()" />
             <input type="color" class="color btn" name="head" value="#e66465" />
             <div class="increase-font-btn btn" onclick="onIncreaseSize()">

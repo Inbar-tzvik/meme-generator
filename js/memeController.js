@@ -221,6 +221,9 @@ function saveMeme(elLink) {
 }
 
 function onAddeEmoji() {
-  addEmoji();
+  var x = document.querySelector('.emoji');
+  var Select_value = x.options[x.selectedIndex].text;
+  console.log(Select_value);
+  addEmoji(Select_value);
   renderMeme();
 }

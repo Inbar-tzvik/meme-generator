@@ -99,3 +99,7 @@ function addMemeToArr(img) {
 function _saveMemesToStorage() {
   saveToStorage(STORAGE_KEY, gSavedMemes);
 }
+
+function addEmoji(value) {
+  gMeme[0].lines.push({ txt: value, size: 60, align: 'left', color: 'white', x: 35, y: 250 });
+}
