@@ -16,6 +16,7 @@ function oninit() {
   gCtx = gCanvas.getContext('2d');
   randBtn.style.display = 'none';
   elGallrey.style.display = 'none';
+  document.querySelector('.search').style.display = 'none';
 
   elCanvas.classList.remove('hide');
   gCanvasWidth = gCanvas.width;
