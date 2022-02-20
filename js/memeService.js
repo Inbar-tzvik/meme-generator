@@ -11,6 +11,7 @@ var gMeme = [
   },
 ];
 var gSavedMemes = [];
+
 const memesSentences = [
   'I never eat falafel',
   'DOMS DOMS EVERYWHERE',
@@ -87,7 +88,7 @@ function getRandomColor() {
   return color;
 }
 
-function addMemeToArr(img) {
+function addMeme(img) {
   gSavedMemes = loadFromStorage(STORAGE_KEY);
   if (!gSavedMemes || !gSavedMemes.length) gSavedMemes = [];
   gSavedMemes.push(img);

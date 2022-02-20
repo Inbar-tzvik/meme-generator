@@ -11,6 +11,7 @@ var gCanvasWidth;
 var changed = false;
 var memeLines;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+
 function oninit() {
   gCanvas = document.getElementById('my-canvas');
   gCtx = gCanvas.getContext('2d');
@@ -50,7 +51,6 @@ function renderMeme(id) {
 }
 
 function drawImage() {
-  // console.log('DRAW IMG');
   var img = new Image();
 
   img.onload = () => {
@@ -150,6 +150,7 @@ function onAddLine() {
   addLine();
   renderMeme();
 }
+
 function checkCanvasSIzeChanged() {
   if (window.innerWidth <= 750) {
     Updatelocation();
@@ -174,7 +175,7 @@ function buildRand() {
 
 function saveMeme() {
   var imgContent = gCanvas.toDataURL('image/jpeg');
-  addMemeToArr(imgContent);
+  addMeme(imgContent);
 }
 
 function onAddeEmoji() {
@@ -214,4 +215,9 @@ function doUploadImg(imgDataUrl, onSuccess) {
     .catch((err) => {
       console.error(err);
     });
+}
+
+function onDeleteLine() {
+  currMeme.lines.splice(currMeme.selectedLineIdx, 1);
+  renderMeme();
 }

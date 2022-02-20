@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>MemeGen
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/main.css" />
   </head>
@@ -13,7 +14,7 @@
 
     <nav class="Nav">
       <div class="nav-content flex main-layout">
-        <img src="img/logo.png" class="logo" />
+        <img src="img/logo.png" class="logo"  />
         <ul class="main-nav clean-list flex">
           <li><a href="index.html">Gallery</a></li>
           <li><a href="#">About</a></li>
@@ -30,7 +31,7 @@
         <!-- <button class="search-btn"type="submit"> search . . .<i class="fa fa-search"></i></button> -->
         
         <div class="search-bar flex">
-        <input class="datalist flex" list="gallery" placeholder="search..." onchange="setFilter(this.value)">
+        <input class="datalist flex" list="gallery" placeholder="search..." onchange="setFilter(this.value)" >
         <datalist id="gallery">
           <option value="ALL">
           <option value="dog">
@@ -57,7 +58,7 @@
       </div>
 
       <div class="editor hide main-layout">
-        <div class="editor-board flex">
+        <div class="editor-board flex main-layout">
           <div class="canvas-container">
             <canvas id="my-canvas" width="400" height="400"></canvas>
           </div>
@@ -68,15 +69,16 @@
             <button class="btn save-to-my-memes" onclick="saveMeme(this)" >Save to My Memes</button>
             <!-- <div class="emoji" >  -->
               <select class="emoji" size="6" ">
-                <option value="😍">😍</option>
-                <option value="🥴">🥴</option>
-                <option value="😁">😁</option>
-                <option value="😀">😀</option>
-                <option value="🥺">🥺</option>
-                <option value="🤭">🤭</option>
+                <option onclick="onAddeEmoji()" value="😍">😍</option>
+                <option onclick="onAddeEmoji()" value="🥴">🥴</option>
+                <option onclick="onAddeEmoji()" value="😁">😁</option>
+                <option onclick="onAddeEmoji()" value="😀">😀</option>
+                <option onclick="onAddeEmoji()" value="🥺">🥺</option>
+                <option onclick="onAddeEmoji()" value="🤭">🤭</option>
                </select> 
-               <input  class="emoji-btn" type="button" id="bouton_Envoyer" value="add emoji" onclick="onAddeEmoji()">
-              <button  class="share-fc " onclick="uploadImg()">Share on  <a href="#" class="fa fa-facebook"></a>
+               <!-- <input  class="emoji-btn" type="button" id="bouton_Envoyer" value="add emoji" onclick="onAddeEmoji()"> -->
+               <!-- <a href="#" class="fa fa-facebook"></a> -->
+              <button  class="share-fc " onclick="uploadImg()">Share  
               </button>
              
 
@@ -91,6 +93,8 @@
             </div>
             <div class="add-line-btn btn" onclick="onSwitchLine()"><img src="img/up-and-down.png" class="add" /></div>
             <div class="add-text btn" onclick="onAddLine()"><img src="img/add.jpg" class="add" /></div>
+            <div class="delete-text btn" onclick="onDeleteLine()"><img src="img/trash.png" class="add" /></div>
+
           </div>
         </div>
       </div>

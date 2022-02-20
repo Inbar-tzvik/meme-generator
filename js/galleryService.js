@@ -13,6 +13,9 @@ var gImgs = [
   { id: 10, url: './img/10.jpg', keywords: ['politics', 'man'] },
   { id: 11, url: './img/11.jpg', keywords: ['man', 'sports'] },
   { id: 12, url: './img/12.jpg', keywords: ['man', 'you'] },
+  { id: 13, url: './img/13.jpg', keywords: ['man', 'you', 'hands'] },
+  { id: 14, url: './img/14.jpg', keywords: ['man', 'you'] },
+  { id: 15, url: './img/15.jpg', keywords: ['man', 'you'] },
 ];
 
 var gFilterBy = 'ALL';
